@@ -1,0 +1,3 @@
+rootProject.name='ylee20202A'
+include ':app'
+include ':01lifecycle'
