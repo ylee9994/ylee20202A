@@ -9,6 +9,7 @@ package com.ylee.a021thread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     ProgressBar pb1;
     Button btnInc, btnDec;
+    Button threadStart;
     TextView tvSeek;
     SeekBar sb1, sb2;
 
@@ -32,10 +34,39 @@ public class MainActivity extends AppCompatActivity {
         tvSeek = findViewById(R.id.tvSeek);
         sb1 = findViewById(R.id.sBar1);
         sb2 = findViewById(R.id.sBar2);
+        threadStart = findViewById(R.id.btnStart);
+        threadStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                for(int i=0; i<100; ++i){
+//                    sb1.setProgress(sb1.getProgress()+2);
+//                    sb2.setProgress(sb2.getProgress()+1);
+//                    SystemClock.sleep(100);
+//                }
+                new Thread(){
+                    public void run(){
+                        for(int i=sb1.getProgress(); i<100; i=i+2){
+                            sb1.setProgress(sb1.getProgress()+2);
+                            SystemClock.sleep(100);
+                        }
+                    }
+                }.start();
+
+                new Thread(){
+                    public void run(){
+                        for(int i=sb2.getProgress(); i<100; i=i+1){
+                            sb2.setProgress(sb2.getProgress()+1);
+                            SystemClock.sleep(100);
+                        }
+                    }
+                }.start();
+            }
+        });
         sb1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 tvSeek.setText("진행율:" + progress + "%");
+                pb1.setProgress(progress);
             }
 
             @Override
@@ -52,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pb1.incrementProgressBy(10);
+                // pb1.setProgress(pb1.getProgress()+10);
             }
         });
         btnDec.setOnClickListener(new View.OnClickListener() {
