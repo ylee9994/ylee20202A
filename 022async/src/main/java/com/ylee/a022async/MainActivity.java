@@ -30,16 +30,19 @@ public class MainActivity extends AppCompatActivity {
         sb2 = findViewById(R.id.sBar2);
         threadStart = findViewById(R.id.btnStart);
         final BackgroundTask task = new BackgroundTask();
-        final BackgroundTask task1 = new BackgroundTask(sb1, 2);
-        final BackgroundTask task2 = new BackgroundTask(sb2, 1);
+
 
         threadStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // task.execute();
-                task1.execute();
-                task2.execute();
-            }
+                final BackgroundTask task1 = new BackgroundTask(sb1, 2);
+                final BackgroundTask task2 = new BackgroundTask(sb2, 1);
+//                task1.execute();
+//                task2.execute();
+                task1.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                task2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+          }
         });
     }
 
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     class BackgroundTask extends AsyncTask<Integer, Integer, Integer> {
         SeekBar pbar;
         int dif;
+        int value;
+
         public BackgroundTask() {
             super();
         }
