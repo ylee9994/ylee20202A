@@ -30,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
         sb2 = findViewById(R.id.sBar2);
         threadStart = findViewById(R.id.btnStart);
         final BackgroundTask task = new BackgroundTask();
+        final BackgroundTask task1 = new BackgroundTask(sb1, 2);
+        final BackgroundTask task2 = new BackgroundTask(sb2, 1);
 
         threadStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task.execute();
+                // task.execute();
+                task1.execute();
+                task2.execute();
             }
         });
     }
@@ -42,9 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     class BackgroundTask extends AsyncTask<Integer, Integer, Integer> {
+        SeekBar pbar;
+        int dif;
         public BackgroundTask() {
             super();
         }
+
+        public BackgroundTask(SeekBar ppbar, int pdif){
+            pbar = ppbar;
+            dif = pdif;
+        }
+
 
         @Override
         protected void onPreExecute() {
@@ -60,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            sb1.setProgress(values[0].intValue());
+            pbar.setProgress(values[0].intValue());
         }
 
         @Override
@@ -75,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Integer... integers) {
-            for (int i = 0; i < 100; i++) {
-                value = value + 2;
+            for (int i = 0; i < 100; i = i+dif) {
+                value = value + dif;
                 publishProgress(value);
                 SystemClock.sleep(100);
              }
