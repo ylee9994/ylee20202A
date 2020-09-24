@@ -11,6 +11,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/01lifecycle" />
+            <option value="$PROJECT_DIR$/021thread" />
+            <option value="$PROJECT_DIR$/022async" />
+            <option value="$PROJECT_DIR$/03http" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

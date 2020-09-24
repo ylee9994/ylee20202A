@@ -1,3 +1,6 @@
+include ':03http'
+include ':022async'
+include ':021thread'
 rootProject.name='ylee20202A'
 include ':app'
 include ':01lifecycle'
