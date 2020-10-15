@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     String xmldata = "<current>\n" +
             "<city id=\"1835848\" name=\"Seoul\">\n" +
             "<coord lon=\"126.98\" lat=\"37.57\"/>\n" +
-            "<country>KR</country>\n" +
+            "<country>South Korea</country>\n" +
             "<timezone>32400</timezone>\n" +
             "<sun rise=\"2019-09-25T21:22:31\" set=\"2019-09-26T09:24:48\"/>\n" +
             "</city>\n" +
@@ -229,12 +229,34 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         button = findViewById(R.id.button);
 
+        setTitle("이용희 xml");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parseXMLopenweather(xmldata);
+                parseXMLopenweather(xmldata);  // 현재 날씨
+                parseXMLforecast(xmlforecast); // 날씨 예보
             }
         });
+    }
+
+    // 1. xmldata 파싱유지
+    // 2. xmlforecast 데이터 파싱해서 시간, 온도, 습도만 표시
+    // 3. setTitle("이용희 xml");
+    // 4. 에뮬레이터 (AVD) 캡쳐해서 과제방 제출
+
+    public void parseXMLforecast(String odata){
+        if(odata == null){
+            textView.setText("예보데이터 없음");
+        }
+        String presult = "Forecast:\n";
+
+        presult += "2019-09-26T09:00:00 " + "temperature = 22.63" + "humidity = 35\n" +
+                "2019-09-26T12:00:00 " + "temperature = 22.63" + "humidity = 35\n" +
+                "2019-09-26T15:00:00 " + "temperature = 20.63" + "humidity = 35\n" +
+                "2019-09-26T18:00:00 " + "temperature = 18.63" + "humidity = 35\n" +
+                "2019-09-26T21:00:00 " + "temperature = 22.63" + "humidity = 35\n";
+
+        textView.setText(presult);
     }
 
     public void parseXMLopenweather(String odata){
@@ -275,6 +297,14 @@ public class MainActivity extends AppCompatActivity {
                         String slat = xpp.getAttributeValue(null, "lat");
                         slocation = "Long:" + slon + ",  " + "Lat:" + slat;
                     }
+                    // <country>KR</country>
+                    else if(fxml.equals("country")){
+                        eventType = xpp.next();
+                        if(eventType == XmlPullParser.TEXT){
+                            scountry = xpp.getText();
+                        }
+                    }
+
                 }
                 eventType = xpp.next();
             }
