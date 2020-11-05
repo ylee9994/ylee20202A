@@ -360,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 parseXMLopenweather(xmldata);  // 현재 날씨
                 parseXMLforecast(xmlforecast); // 날씨 예보
-                parseXMLbooks(xmlbook);
+                //parseXMLbooks(xmlbook);
             }
         });
     }
