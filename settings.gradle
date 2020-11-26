@@ -1,3 +1,7 @@
+include ':11classkotlin'
+include ':11classjava'
+include ':10maps'
+include ':08openweather'
 include ':07json'
 include ':06xmljson'
 include ':03http'

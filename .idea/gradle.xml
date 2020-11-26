@@ -16,6 +16,10 @@
             <option value="$PROJECT_DIR$/03http" />
             <option value="$PROJECT_DIR$/06xmljson" />
             <option value="$PROJECT_DIR$/07json" />
+            <option value="$PROJECT_DIR$/08openweather" />
+            <option value="$PROJECT_DIR$/10maps" />
+            <option value="$PROJECT_DIR$/11classjava" />
+            <option value="$PROJECT_DIR$/11classkotlin" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
