@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return rdata;
     }
+
+
     public String getHTTPdata2(String urlStr){
         String rdata = null;
 
