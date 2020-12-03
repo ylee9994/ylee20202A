@@ -1,3 +1,5 @@
+include ':12spinnerkotlin'
+include ':12spinnerjava'
 include ':11classkotlin'
 include ':11classjava'
 include ':10maps'
